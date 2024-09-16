@@ -1,0 +1,138 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: blob_font;
+  src: url("blob_font_regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: blob_font;
+  src: url("blob_font_bold.ttf");
+  font-weight: bold;
+}
+
+:root {
+  --color-text: white;
+  --color-info: #878787;
+  --color-base: #f2f2f2;
+  --color-good-dark: #127a20;
+  --color-bad: #b84b5f;
+  --color-button-disabled: #e3e3e3;
+  --color-milestone-border: #6aa9dc;
+}
+
+button {
+  font-family: blob_font, serif;
+}
+
+#gameView {
+  font-family: blob_font, serif !important;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.point-upgrade-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.point-upgrade-button {
+  flex: 1;
+  height: 80px;
+  border: 1px solid var(--color-good-dark);
+  border-radius: 4px;
+  background-color: var(--color-base);
+}
+
+.space {
+  width: 4.5px;
+}
+
+#firstResetButton {
+  width: 100%;
+  height: 60px;
+  border: 1px solid var(--color-good-dark);
+  border-radius: 4px;
+  background-color: var(--color-base);
+}
+
+.btn-disabled {
+  border-color: var(--color-bad) !important;
+  background-color: var(--color-button-disabled) !important;
+}
+
+#milestoneViews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.milestone-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+}
+
+.milestone {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-milestone-border);
+  margin: 6px 0;
+  background-color: var(--color-base);
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 5px;
+}
+
+#galaxyInfoView {
+  color: var(--color-milestone-border);
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#galaxyRow {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  width: 100%;
+}
+
+#buyGalaxyButton, #buyMaxGalaxyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-milestone-border);
+  margin: 6px 0;
+  background-color: var(--color-base);
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 5px 0;
+  flex: 1;
+}
+
+.galaxy-value {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 13px;
+  justify-content: center;
+  align-items: center;
+}
