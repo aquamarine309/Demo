@@ -17,10 +17,12 @@ function formatWithCommas(value) {
 };
 
 function format(value, places, placesUnder1000) {
+  if (player.formatEND) return "END";
   return notation.format(value, places, placesUnder1000, 3);
 }
 
 function formatInt(value) {
+  if (player.formatEND) return "END";
   if (typeof value === "number" && value <= 1e9) {
     return formatWithCommas(value.toFixed(0));
   }
@@ -58,6 +60,7 @@ let player = {
   boost: DC.D0,
   energy: DC.D0,
   galaxies: DC.D0,
+  formatEND: false,
   records: {
     maxPoints: DC.D1
   },
@@ -96,7 +99,7 @@ function mergeObj(target, current) {
       } else if (typeof value === "object") {
        newObj[key] = deepcopy(value);
       } else {
-        newObj[key] = obj[key];
+        newObj[key] = current[key];
       }
     } else {
       if (value instanceof Decimal) {
@@ -142,15 +145,17 @@ const strings = {
   milestone_3: "解锁星系",
   galaxy_description: "由于星系的影响，时间流速会异常增高",
   you_have_X_galaxies: "你拥有 %1$s 个星系",
-  amount_X: "数量: %1$s",
-  mult_X: "加成: %1$s",
+  amount_X: "星系数量: %1$s",
+  mult_X: "星系加成: %1$s",
   cost_X_energy: "价格: %1$s 能量",
   buy_galaxy: "购买星系",
   buy_galaxy_b: "自动进行重置",
-  buy_max: "购买最大数量"
+  buy_max: "购买最大数量",
+  end_text: "游戏已通关，感谢您的游玩！",
+  toggle_end: "切换数字显示"
 }
 
-const uiViews = ["gameView", "headerResourceView", "pointTextView", "generatorButton", "boostButton", "firstResetButton", "energyTextView", "milestoneViews", "milestoneView0", "milestoneView1", "milestoneView2", "milestoneView3", "galaxyInfoView", "galaxyRow", "galaxyAmountView", "galaxyMultView", "buyGalaxyButton", "buyMaxGalaxyButton"];
+const uiViews = ["gameView", "headerResourceView", "pointTextView", "generatorButton", "boostButton", "firstResetButton", "energyTextView", "milestoneViews", "milestoneView0", "milestoneView1", "milestoneView2", "milestoneView3", "galaxyInfoView", "galaxyRow", "galaxyAmountView", "galaxyMultView", "buyGalaxyButton", "buyMaxGalaxyButton", "toggleENDButton", "endText", "endView"];
 
 for (const id of uiViews) {
   const el = document.getElementById(id);
@@ -354,6 +359,11 @@ buyMaxGalaxyButton.addEventListener("click", function() {
   Galaxy.max();
 });
 
+toggleENDButton.addEventListener("click", function() {
+  if (!isEND()) return;
+  player.formatEND = !player.formatEND;
+});
+
 class Milestone extends Effect {
   get requirement() {/* abstract */}
   get canBeApplied() { return player.energy.gte(this.requirement); }
@@ -381,6 +391,10 @@ const Milestones = {
   unlockGalaxy: new class extends Milestone {
     get requirement() { return DC.D6; }
   }
+}
+
+function isEND() {
+  return player.records.maxPoints.gte(Decimal.dNumberMax);
 }
 
 const Galaxy = {
@@ -424,6 +438,8 @@ const Galaxy = {
 
 galaxyInfoView.innerText = strings.galaxy_description;
 buyMaxGalaxyButton.innerText = strings.buy_max;
+endText.innerText = strings.end_text;
+toggleENDButton.innerText = strings.toggle_end;
 
 const gameInterval = setInterval(function() {
   let diff = Date.now() - player.lastUpdate;
@@ -608,7 +624,7 @@ const gameInterval = setInterval(function() {
   
   if (Galaxy.isUnlocked) {
     galaxyInfoView.style.display = "inherit";
-    galaxyRow.style.disaply = "inherit";
+    galaxyRow.style.display = "flex";
     galaxyAmountView.innerText = (
       String.format(
         strings.amount_X,
@@ -635,6 +651,11 @@ const gameInterval = setInterval(function() {
     } else {
       buyGalaxyButton.classList.add("btn-disabled");
       buyMaxGalaxyButton.classList.add("btn-disabled");
+    }
+    if (isEND()) {
+      endView.style.visibility = "visible";
+    } else {
+      endView.style.visibility = "hidden";
     }
   } else {
     galaxyInfoView.style.display = "none";
