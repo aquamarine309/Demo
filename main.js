@@ -652,14 +652,15 @@ const gameInterval = setInterval(function() {
       buyGalaxyButton.classList.add("btn-disabled");
       buyMaxGalaxyButton.classList.add("btn-disabled");
     }
-    if (isEND()) {
-      endView.style.visibility = "visible";
-    } else {
-      endView.style.visibility = "hidden";
-    }
   } else {
     galaxyInfoView.style.display = "none";
     galaxyRow.style.display = "none";
+  }
+
+  if (isEND()) {
+    endView.style.visibility = "visible";
+  } else {
+    endView.style.visibility = "hidden";
   }
   
 }, player.updateRate);
