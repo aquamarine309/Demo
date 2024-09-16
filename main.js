@@ -53,7 +53,7 @@ const DC = {
 const GAME_SPEED = 1;
 
 let player = {
-  points: DC.E3,
+  points: DC.D1,
   generator: DC.D0,
   boost: DC.D0,
   energy: DC.D0,
