@@ -1,0 +1,216 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+  background-repeat: no-repeat;
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.l-game-ui {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: BlobFont, serif;
+}
+
+:root {
+  --color-good: #127a20;
+  --color-app-bar: #008577;
+  --color-grey: #878787;
+  --color-text: #000000;
+  --color-base: #f6f6f6;
+  --color-bad: #b84b5f;
+  --color-galaxy: #6aa9dc;
+}
+
+@font-face {
+  font-family: BlobFont;
+  src: url("blob_font_regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: BlobFont;
+  src: url("blob_font_bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: FontAwesome;
+  src: url("fa-solid-900.ttf");
+}
+
+.o-app-bar {
+  width: 100%;
+  height: 64px;
+  background-color: var(--color-app-bar);
+  box-shadow: 0 0 4px var(--color-grey);
+}
+
+.l-main-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 80px;
+  flex-grow; 1;
+  position: relative;
+}
+
+.l-game-header-resources {
+  color: var(--color-grey);
+  margin-bottom: 17.5px;
+}
+
+.c-singularity-amount {
+  font-weight: bold;
+  font-size: 165%;
+  color: var(--color-text);
+}
+
+.c-energy-amount {
+  font-weight: bold;
+  font-size: 125%;
+  color: var(--color-galaxy);
+}
+
+.o-primary-btn {
+  border: 1px solid var(--color-good);
+  border-radius: 4px;
+  background-color: var(--color-base);
+  font-family: BlobFont, serif;
+}
+
+.o-primary-btn--disabled {
+  border-color: var(--color-bad);
+  background-color: #e3e3e3;
+}
+
+.l-main-upgrade-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.o-main-upgrade-btn {
+  flex: 1;
+  padding: 5px;
+}
+
+.o-row-space {
+  width: 4.5px;
+  height: 100%;
+}
+
+.o-column-space {
+  width: 100%;
+  height: 4.5px;
+}
+
+.l-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 2px solid var(--color-good);
+  background-color: var(--color-base);
+  display: flex;
+  padding: 10px;
+  min-width: 300px;
+  border-radius: 8px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+}
+
+.c-modal-message {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.c-modal-confirm-btn {
+  font-weight: bold;
+}
+
+.c-save-icon {
+  font-family: FontAwesome;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+}
+
+.l-save-info {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  padding: 4px;
+  background-color: var(--color-base);
+  border: 1px solid var(--color-good);
+  border-radius: 4px;
+  z-index: 2
+}
+
+.a-save-info-enter-active,
+.a-save-info-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.a-save-info-enter-from,
+.a-save-info-leave-to {
+  opacity: 0;
+}
+
+.c-first-reset {
+  width: 100%;
+  height: 60px;
+}
+
+.l-energy-milestone-row {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  margin: 6px 0;
+  height: auto;
+}
+
+.c-energy-milstone {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 12px;
+  border-radius: 4px;
+  margin: 6px 0;
+  padding: 5px;
+  border: 1px solid var(--color-galaxy);
+  background-color: var(--color-base);
+}
+
+.c-energy-milestone--locked {
+  border-color: var(--color-bad);
+  background-color: #e3e3e3;
+}
